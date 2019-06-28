@@ -11,20 +11,18 @@ function calculateQuadraticEquation(){
 }
 
 function getResult(a, b, c) { // 2x^2+4x-3=0.
-    if(a == 0 || b == 0 || c == 0) alert('Введите числа не равные "0"');
-    else {
-        let result = (Math.pow(b, 2)) - (4 * a * c),// b^2 - 4ac;
-            arrResult = [];
-        console.log(result, arrResult);
-        if (result === 0) arrResult.push(result);
-        else if (result < 0) arrResult.push('нет корня');
-        else if(result > 0) {
-            arrResult[0] = Math.round((-b + Math.sqrt(result)) / (2 * a));
-            arrResult[1] = Math.round((-b - Math.sqrt(result)) / (2 * a));
-        }// x = -b +- Math.sqrt(D) / 2 * a
-        return arrResult;
-    }
-}
+    if(a == 0 || b == 0 || c == 0) return alert('Значение не может быть нулем!');
+    let result = (Math.pow(b, 2)) - (4 * a * c),// b^2 - 4ac;
+        arrResult = [];
+    console.log(result, arrResult);
+    if (result === 0) arrResult.push((-b + Math.sqrt(result)) / (2 * a)).toFixed(2);
+    else if(result > 0) {
+        arrResult[0] = ((-b + Math.sqrt(result)) / (2 * a)).toFixed(2);
+        arrResult[1] = ((-b - Math.sqrt(result)) / (2 * a)).toFixed(2);
+    }// x = -b +- Math.sqrt(D) / 2 * a
+    return arrResult;
+} // забыл посчитать 1 корень) 
+
 
 function calculateAverageRating(){
     let marks = window.marks.value.split("").map(Number).filter((n)=> !isNaN(n) && n > 0);
@@ -33,19 +31,11 @@ function calculateAverageRating(){
 }
 
 function getAverageMark(marks){
-    let value = 0;
-    function getSearch(a) {
-        for (let i = 0; i < a; i++) {
-            value += marks[i];
-            }
-    } // просто чтобы не повторяться
-    if (marks.length <= 5) getSearch(marks.length);   
-    else if (marks.length > 5) {
-        getSearch(5); 
-        console.log(marks.slice(0,5));
-    }
-    return (marks.length <= 5) ? Math.round(value / marks.length) : Math.round(value / 5);
-}
+    let value = 0, arr = marks.slice(0,5);
+    if (marks.length > 5) console.log(`Оценок более пяти, посчитано только первые пять ${arr}`);
+    for ( let val of arr) value += val;
+    return Math.round(value / arr.length);
+} // так действительно проще))
 
 function calculateDrinkTask(){
     let name = window.personName.value;
