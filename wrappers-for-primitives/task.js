@@ -12,17 +12,15 @@ function calculateMortgage() {
 
 function calculateTotalMortgage(percent = 0, contribution = 0, amount = 0, date) {
     let mounth = (Date.parse(date) - Date.now()) / 2592000000;
-    if(typeof percent === 'number' || typeof contribution === 'number' || typeof amount === 'number') {
+    if(typeof percent === 'number' && typeof contribution === 'number' && typeof amount === 'number' && isNaN(date) === true) {
         let S = amount - contribution;
         let P = Math.round(percent / 12);
         let totalAmount = S * (P + P / (((1 + P) ^ mounth) - 1)); // S*(P+P/(((1+P)^n)-1))
-        console.log(totalAmount, mounth, S, P);
+        console.log(totalAmount);
         return totalAmount.toFixed(2);
     } else {
-        console.log('Нихера');
-    }
-    
-    
+        console.log('Введенные данные не верны!');
+    } 
 }   
 
 function sayHello() {
@@ -33,6 +31,11 @@ function sayHello() {
 }
 
 function getGreeting(name) {
-    // код для задачи №2 писать здесь
-    //return greeting;
+    let greeting;
+    if (typeof name === 'string' && name != '' && name != 'undefined' && name != 'null')  {
+        greeting = `Привет, мир! Меня зовут ${name}`;
+    } else {
+        greeting = `Привет, мир! Меня зовут Аноним`;
+    }
+    return greeting;
 }
