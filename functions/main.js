@@ -30,24 +30,29 @@ showSolutionsMessage(4, 4, 4);
 showSolutionsMessage(1, -5, 6);
 showSolutionsMessage(16, -8, 1);
 
-function getAverageScore(data) { 
-    
+function getAverageScore(data) {
+   let averageObject = getArrayAverage(data);
+   let counter = 0, summ = 0;
+   for(let ever in averageObject) {
+       counter++;
+       summ += averageObject[ever];
+   }
+   averageObject.average = summ / counter;
+   return averageObject;
 }
 
-function getArrayAverage() {
-    
-    // let count = 0;
-    // for(let r in d) {
-    //     console.log(typeof(r), typeof(d));
-    //     // for ( let i = 0; i < d.r.length; i++) {
-    //     //     count += d.algebra[i];
-    //     // }
-    // }
-    return this.algebra.length;
-    // return count / d.algebra.length;
-
-    
+function getArrayAverage(d) {
+    let obj = {};
+    for (let r in d) {
+        let count = 0;
+        for(let i = 0; i < d[r].length; i++) {
+            count += d[r][i];
+        }
+        obj[r] = count / d[r].length;
+        }
+        return obj;
 }
+
 console.log( getAverageScore({
     algebra : [2, 4, 5, 2, 5, 4],
     geometry : [2, 4, 5],
