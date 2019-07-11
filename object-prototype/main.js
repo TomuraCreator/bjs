@@ -1,3 +1,18 @@
+function initPrintAnimalSound() {
+    const animal = {
+        sound: 'grrrr',
+    };
+
+    const result = getAnimalSound(animal);
+    document.getElementById('sound').innerHTML = result;   
+}
+function getAnimalSound(animal) {
+    if (animal === undefined) return null;
+    else return animal.sound;
+}
+
+////////////////////////////////////////////////////////////////
+
 function initCheckBirthday() {
     const birthday = document.getElementById('birthday').value;
 
@@ -10,19 +25,7 @@ function checkBirthday(birthday) {
     // код для задачи №1 писать здесь
 }
 
-function initPrintAnimalSound() {
-    const animal = {
-        sound: 'grrrr',
-    };
-
-    const result = getAnimalSound(animal);
-
-    document.getElementById('sound').innerHTML = result;   
-}
-
-function getAnimalSound(animal) {
-    // код для задачи №2 писать здесь
-}
+//////////////////////////////////////////////////////////////////////
 
 function initCalculateStatement() {
     for (let idx = 0; idx < 3; idx++) {
