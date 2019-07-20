@@ -1,24 +1,6 @@
 function compareArrays(arr1, arr2) {
-    count.reset();
-    const manyAray = (arr1 >= arr2) ? arr1 : arr2,
-        lessArray = (arr2 <= arr1) ? arr2 : arr1;
-    const back = manyAray.every(element => element === lessArray[count.getNext()]);
-
-    return back;
+    if(arr1.length === arr2.length) return back = arr1.every((element, index) => element === arr2[index]);
 }
-function makeCounter() {
-    var currentCount = 0;
-    return {
-      getNext: () => currentCount++,
-      reset: () => currentCount = 0
-      }
-};
-const count = makeCounter();
-
-function checkArray(a, b) {
-   return a.find(element => compareArrays(element.args, b))
-}
-    
 
 const sum = (t) => {
     let sums = 0;
@@ -32,38 +14,33 @@ function memoize(fun, limit) {
     let memory = [];
     console.log(memory)
     return function() {
-        if(checkArray(memory, Array.from(arguments))) {
-            const funcVar = checkArray(memory, Array.from(arguments));
-            console.info(`Прошлый результат с числами ${funcVar.args}: ${funcVar.result}`)
-            memory.push({
-                args: funcVar.args,
-                result: funcVar.result,
-                info: 'Из памяти'
-            })
+        const findIndexInArray = memory.find(element => compareArrays(element.args, Array.from(arguments)))
+        if(findIndexInArray) {
+            return `Результат выведен из памяти для чисел - ${findIndexInArray.args} : ${findIndexInArray.result}`;
         } else {
             memory.push({
                 args: Array.from(arguments),
                 result: fun(arguments)
             })
-            console.log(fun(arguments));
         }
-        
         if (memory.length > limit) memory.shift();
-        
+        return memory[memory.length - 1].result;
     }
 }
 const mSum = memoize(sum, 5);
 
 
-mSum(5, 6, 2);
-mSum(6, 6, 1, 5);
-mSum(3, 6, 6);
-mSum(6, 6, 3, 3);
-mSum(3, 6);
-mSum(5, 6, 2, 2);
-mSum(6, 6);
-mSum(6, 6);
-mSum(6, 6, 3);
+console.log(mSum(5, 6, 2));
+console.log(mSum(6, 6, 1, 5));
+console.log(mSum(3, 6, 6));
+console.log(mSum(6, 6, 3, 3));
+console.log(mSum(3, 6));
+console.log(mSum(5, 6, 2, 2));
+console.log(mSum(6, 6));
+console.log(mSum(6, 6));
+console.log(mSum(6, 6));
+
+console.log(mSum(6, 6, 3));
 
 
 
