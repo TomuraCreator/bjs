@@ -1,5 +1,6 @@
 function compareArrays(arr1, arr2) {
-    if(arr1.length === arr2.length) return back = arr1.every((element, index) => element === arr2[index]);
+    if(arr1.length === arr2.length) return arr1.every((element, index) => element === arr2[index]);
+    else return false;
 }
 
 const sum = (t) => {
@@ -16,7 +17,7 @@ function memoize(fun, limit) {
     return function() {
         const findIndexInArray = memory.find(element => compareArrays(element.args, Array.from(arguments)))
         if(findIndexInArray) {
-            return `Результат выведен из памяти для чисел - ${findIndexInArray.args} : ${findIndexInArray.result}`;
+            return findIndexInArray.result;
         } else {
             memory.push({
                 args: Array.from(arguments),
